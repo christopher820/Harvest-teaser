@@ -198,6 +198,52 @@ img { display: block; max-width: 100%; }
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* Quality & Compliance */
+.quality-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 56px; }
+.quality-head { font-weight: 500; font-size: clamp(32px, 4vw, 64px); line-height: 1.05; letter-spacing: -0.03em; margin-top: 20px; }
+.quality-img { width: 100%; aspect-ratio: 4/3; border-radius: 16px; object-fit: cover; display: block; }
+.quality-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
+.quality-card { padding: 28px 24px; border: 1px solid #f0f0f0; border-radius: 14px; cursor: default; transition: background 0.2s, border-color 0.2s; }
+.quality-card:hover { background: #111; border-color: #111; }
+.quality-card svg { width: 28px; height: 28px; color: #bbb; margin-bottom: 18px; display: block; transition: color 0.2s; }
+.quality-card:hover svg { color: rgba(255,255,255,0.4); }
+.quality-card h4 { font-weight: 500; font-size: 15px; letter-spacing: -0.01em; margin-bottom: 8px; transition: color 0.2s; }
+.quality-card:hover h4 { color: #fff; }
+.quality-card p { font-size: 13px; line-height: 1.7; color: #999; transition: color 0.2s; }
+.quality-card:hover p { color: rgba(255,255,255,0.55); }
+.quality-disclaimer { text-align: center; font-size: 11px; color: #ccc; letter-spacing: 0.05em; line-height: 1.6; }
+
+/* Process */
+.process { background: #f9f9f9; }
+.process-head { font-weight: 500; font-size: clamp(32px, 4vw, 64px); line-height: 1.05; letter-spacing: -0.03em; text-align: center; margin-bottom: 56px; }
+.process-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.process-card { padding: 32px 26px; border-radius: 14px; background: #fff; cursor: default; transition: background 0.2s; }
+.process-card:hover { background: #111; color: #fff; }
+.process-card:hover .process-num { color: rgba(255,255,255,0.35); }
+.process-card:hover h4 { color: #fff; }
+.process-card:hover p { color: rgba(255,255,255,0.6); }
+.process-card.active { background: #111; color: #fff; }
+.process-num { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #ccc; font-weight: 500; margin-bottom: 20px; transition: color 0.2s; }
+.process-card.active .process-num { color: rgba(255,255,255,0.35); }
+.process-card h4 { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; margin-bottom: 10px; transition: color 0.2s; }
+.process-card p { font-size: 13px; line-height: 1.7; color: #999; transition: color 0.2s; }
+.process-card.active p { color: rgba(255,255,255,0.6); }
+
+/* Teaser bridge */
+.teaser-bridge { text-align: center; padding: clamp(72px, 10vh, 120px) clamp(28px, 6vw, 96px) clamp(48px, 6vh, 80px); }
+.teaser-bridge-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #bbb; font-weight: 500; margin-bottom: 18px; }
+.teaser-bridge-head { font-weight: 500; font-size: clamp(30px, 3.8vw, 60px); line-height: 1.08; letter-spacing: -0.025em; }
+
+@media (max-width: 900px) {
+  .quality-header { grid-template-columns: 1fr; gap: 32px; }
+  .quality-cards  { grid-template-columns: 1fr 1fr; }
+  .process-cards  { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .quality-cards { grid-template-columns: 1fr; }
+  .process-cards { grid-template-columns: 1fr; }
+}
   </style>
 
   <!-- GSAP + ScrollTrigger (must load before React scripts) -->
@@ -316,81 +362,216 @@ const About = () => (
   </section>
 );
 
+// ---- Quality & Compliance ----
+const Quality = () => (
+  <section className="sec">
+    <div className="quality-header">
+      <div>
+        <div className="sec-label">Quality &amp; Compliance</div>
+        <h2 className="quality-head">Operational maturity<br />from the start.</h2>
+      </div>
+      <img className="quality-img" src="upclose.png" alt="" />
+    </div>
+    <div className="quality-cards">
+      <div className="quality-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>
+        </svg>
+        <h4>Supplier qualification</h4>
+        <p>Rigorous vetting and ongoing monitoring of all raw material and component suppliers.</p>
+      </div>
+      <div className="quality-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 3h6M9 3v8L5.5 17A2 2 0 007.3 20h9.4a2 2 0 001.8-3L15 11V3"/><path d="M6.5 15h11"/>
+        </svg>
+        <h4>Testing &amp; documentation</h4>
+        <p>Comprehensive identity, purity, and potency testing with full traceability documentation.</p>
+      </div>
+      <div className="quality-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+        </svg>
+        <h4>Stability mindset</h4>
+        <p>Designing for product consistency and shelf-life performance from the earliest stages.</p>
+      </div>
+      <div className="quality-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <h4>Label &amp; claim review</h4>
+        <p>Structured review processes to ensure label accuracy and regulatory alignment.</p>
+      </div>
+    </div>
+    <p className="quality-disclaimer">We develop dietary supplements. Statements on this site are informational and not medical advice.</p>
+  </section>
+);
+
+// ---- From concept to market ----
+const Process = () => (
+  <section className="sec process">
+    <h2 className="process-head">From concept to market.</h2>
+    <div className="process-cards">
+      {[
+        { n: "01", title: "Discovery",      body: "We define supplement concepts addressing unmet needs of the US population." },
+        { n: "02", title: "Validation",     body: "We validate our concepts scientifically through rigorous mining of the scientific literature and new studies." },
+        { n: "03", title: "Manufacturing",  body: "We work with like-minded manufacturers to produce high-quality supplements in accordance with US regulations." },
+        { n: "04", title: "Launch",         body: "We launch our products to health-conscious US consumers demanding science-backed supplements." },
+      ].map(({ n, title, body, active }) => (
+        <div key={n} className={`process-card${active ? ' active' : ''}`}>
+          <div className="process-num">{n}</div>
+          <h4>{title}</h4>
+          <p>{body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+// ---- Teaser bridge ----
+const TeaserBridge = () => (
+  <div className="teaser-bridge">
+    <div className="teaser-bridge-label">Our first product</div>
+    <h2 className="teaser-bridge-head">Something new is on its way.</h2>
+  </div>
+);
+
 // ---- Microbe scroll video ----
 const MicrobeVideo = () => {
   const containerRef = React.useRef(null);
-  const videoRef     = React.useRef(null);
+  const canvasRef    = React.useRef(null);
   const overlay1Ref  = React.useRef(null);
   const overlay2Ref  = React.useRef(null);
+  const [loadPct, setLoadPct] = React.useState(0);
+  const [ready, setReady]     = React.useState(false);
 
   React.useEffect(() => {
     const container = containerRef.current;
-    const video     = videoRef.current;
+    const canvas    = canvasRef.current;
     const ov1       = overlay1Ref.current;
     const ov2       = overlay2Ref.current;
-    if (!container || !video) return;
+    if (!container || !canvas) return;
 
-    let rawP  = 0;   // scroll progress [0,1]
-    let goalP = 0;   // lightly smoothed target
+    const ctx    = canvas.getContext('2d');
+    const frames = [];
+    let targetP  = 0;
+    let smoothP  = 0;
+    let lastIdx  = -1;
     let rafId;
-    const DEAD = 0.04; // seconds — tolerance before we act
+
+    const drawFrame = (idx) => {
+      const f = frames[Math.min(Math.max(0, idx), frames.length - 1)];
+      if (!f) return;
+      const cw = canvas.width, ch = canvas.height;
+      const fw = f.width, fh = f.height;
+      const scale = Math.max(cw / fw, ch / fh);
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(f, (cw - fw * scale) / 2, (ch - fh * scale) / 2, fw * scale, fh * scale);
+    };
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width  = canvas.offsetWidth  * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      if (lastIdx >= 0) drawFrame(lastIdx);
+    };
 
     const onScroll = () => {
-      const rect  = container.getBoundingClientRect();
-      const range = container.offsetHeight - window.innerHeight;
-      rawP = Math.max(0, Math.min(1, -rect.top / range));
+      const rect = container.getBoundingClientRect();
+      targetP = Math.max(0, Math.min(1, -rect.top / (container.offsetHeight - window.innerHeight)));
     };
 
     const tick = () => {
-      // Small lerp so backward seeking doesn't jump too hard
-      goalP += (rawP - goalP) * 0.14;
-
-      if (video.duration) {
-        const goal = goalP * video.duration;
-        const diff = goal - video.currentTime;
-
-        if (diff > DEAD) {
-          // ── FORWARD: let the browser play — hardware-decoded, silky smooth ──
-          const rate = Math.min(diff * 5, 8);   // proportional speed, cap 8×
-          if (video.playbackRate !== rate) video.playbackRate = rate;
-          if (video.paused) video.play().catch(() => {});
-          // Brake: stop just before we overshoot
-          if (video.currentTime + DEAD >= goal) video.pause();
-
-        } else if (diff < -DEAD) {
-          // ── BACKWARD: must seek (no way to play in reverse) ──
-          if (!video.paused) video.pause();
-          if (!video.seeking)  video.currentTime = goal;
-
-        } else {
-          // ── AT TARGET: idle ──
-          if (!video.paused) video.pause();
-        }
-
-        // Overlays track where the video frame actually is
-        const p = video.currentTime / video.duration;
-        if (ov1) setOverlay(ov1, p, 0.28, 0.37, 0.52, 0.60);
-        if (ov2) setOverlay(ov2, p, 0.62, 0.70, 0.88, 0.97);
+      if (frames.length) {
+        smoothP += (targetP - smoothP) * 0.12;
+        const idx = Math.round(smoothP * (frames.length - 1));
+        if (idx !== lastIdx) { lastIdx = idx; drawFrame(idx); }
+        if (ov1) setOverlay(ov1, smoothP, 0.28, 0.37, 0.52, 0.60);
+        if (ov2) setOverlay(ov2, smoothP, 0.62, 0.70, 0.88, 0.97);
       }
-
       rafId = requestAnimationFrame(tick);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', resize);
     onScroll();
+    resize();
     rafId = requestAnimationFrame(tick);
+
+    // ── Extract all frames once by playing at 2× speed ──
+    // Forward/backward scrubbing then becomes a pure array lookup — no seeking ever.
+    const vid = document.createElement('video');
+    vid.src = 'pill.mp4';
+    vid.muted = true;
+    vid.playsInline = true;
+    vid.preload = 'auto';
+    vid.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:1px;height:1px;top:-9999px';
+    document.body.appendChild(vid);
+
+    const makeFrame = (w, h) => {
+      try { return new OffscreenCanvas(w, h); }
+      catch (_) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+    };
+
+    const extract = async () => {
+      await new Promise(res => {
+        if (vid.readyState >= 1) { res(); return; }
+        vid.addEventListener('loadedmetadata', res, { once: true });
+        vid.load();
+      });
+
+      const dur  = vid.duration;
+      const step = 1 / 15; // capture at 15 fps
+      let next   = 0;
+
+      vid.currentTime = 0;
+      await new Promise(res => {
+        if (vid.currentTime < 0.001) { res(); return; }
+        vid.addEventListener('seeked', res, { once: true });
+      });
+
+      vid.playbackRate = 2; // extract in half real-time
+
+      await new Promise(res => {
+        vid.addEventListener('ended', res, { once: true });
+        const loop = () => {
+          while (vid.currentTime + 0.001 >= next && next <= dur + step) {
+            const f = makeFrame(vid.videoWidth, vid.videoHeight);
+            f.getContext('2d').drawImage(vid, 0, 0);
+            frames.push(f);
+            next += step;
+            setLoadPct(Math.round(Math.min(next / dur, 1) * 100));
+          }
+          if (vid.ended || vid.currentTime >= dur - step * 0.5) { res(); return; }
+          requestAnimationFrame(loop);
+        };
+        vid.play().then(() => requestAnimationFrame(loop)).catch(res);
+      });
+
+      setReady(true);
+      drawFrame(0);
+    };
+
+    extract().catch(console.warn);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', resize);
       cancelAnimationFrame(rafId);
-      video.pause();
+      vid.pause();
+      if (vid.parentNode) vid.parentNode.removeChild(vid);
+      frames.forEach(f => f.close?.());
     };
   }, []);
 
   return (
     <div ref={containerRef} className="microbe-container" style={{ height: "350vh" }}>
       <div className="microbe-sticky">
-        <video ref={videoRef} className="microbe-video" src="pill.mp4" preload="auto" muted playsInline />
+        <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', background: '#000' }} />
+        {!ready && (
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 2, background: 'rgba(255,255,255,0.1)' }}>
+            <div style={{ height: '100%', background: 'rgba(255,255,255,0.55)', width: `${loadPct}%`, transition: 'width 0.15s linear' }} />
+          </div>
+        )}
         <div ref={overlay1Ref} className="microbe-overlay">
           <p>We are currently under development</p>
         </div>
@@ -491,6 +672,9 @@ const App = () => (
     <HeroVideo />
     <TopNav />
     <About />
+    <Quality />
+    <Process />
+    <TeaserBridge />
     <MicrobeVideo />
     <Partners />
     <ComingSoon />
