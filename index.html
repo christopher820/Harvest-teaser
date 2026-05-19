@@ -84,14 +84,13 @@ img { display: block; max-width: 100%; }
 .sec-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #bbb; margin-bottom: 32px; font-weight: 500; }
 
 /* About */
-.about-head { font-weight: 500; font-size: clamp(36px, 4.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 56px; max-width: 760px; }
-.about-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 80px; margin-bottom: 64px; }
-.about-lede { font-size: clamp(16px, 1.35vw, 20px); line-height: 1.5; font-weight: 300; color: #222; }
-.about-text { font-size: 14px; line-height: 1.75; color: #999; }
-.pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-.pillar-num { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: #ccc; font-weight: 500; margin-bottom: 12px; }
-.pillar h4 { font-weight: 500; font-size: 16px; letter-spacing: -0.01em; margin-bottom: 8px; }
-.pillar p { font-size: 13px; line-height: 1.7; color: #999; }
+.about-top { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: center; margin-bottom: 64px; }
+.about-head { font-weight: 500; font-size: clamp(36px, 4.8vw, 76px); line-height: 1.02; letter-spacing: -0.03em; margin-bottom: 28px; }
+.about-lede { font-size: clamp(15px, 1.25vw, 18px); line-height: 1.6; font-weight: 300; color: #555; }
+.about-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 16px; display: block; }
+.about-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; padding-top: 48px; border-top: 1px solid #f0f0f0; }
+.about-stat-val { font-weight: 500; font-size: clamp(20px, 2.2vw, 32px); letter-spacing: -0.02em; margin-bottom: 6px; }
+.about-stat-desc { font-size: 12px; color: #bbb; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
 
 /* Microbe scroll video */
 .microbe-container { position: relative; }
@@ -191,18 +190,21 @@ img { display: block; max-width: 100%; }
 /* Responsive */
 @media (max-width: 900px) {
   .topnav { padding: 0 24px; }
-  .about-cols { grid-template-columns: 1fr; gap: 24px; }
-  .pillars { grid-template-columns: 1fr; gap: 28px; }
+  .about-top { grid-template-columns: 1fr; gap: 32px; }
+  .about-stats { grid-template-columns: 1fr 1fr; gap: 28px; }
   .partners-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 480px) {
+  .about-stats { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 600px) {
   .form-row { grid-template-columns: 1fr; }
 }
 
 /* Quality & Compliance */
-.quality-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 56px; }
+.quality-header { display: grid; grid-template-columns: 2fr 3fr; gap: 60px; align-items: center; margin-bottom: 56px; }
 .quality-head { font-weight: 500; font-size: clamp(32px, 4vw, 64px); line-height: 1.05; letter-spacing: -0.03em; margin-top: 20px; }
-.quality-img { width: 100%; aspect-ratio: 4/3; border-radius: 16px; object-fit: cover; display: block; }
+.quality-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 16px; display: block; }
 .quality-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 40px; }
 .quality-card { padding: 28px 24px; border: 1px solid #f0f0f0; border-radius: 14px; cursor: default; transition: background 0.2s, border-color 0.2s; }
 .quality-card:hover { background: #111; border-color: #111; }
@@ -239,6 +241,7 @@ img { display: block; max-width: 100%; }
   .quality-header { grid-template-columns: 1fr; gap: 32px; }
   .quality-cards  { grid-template-columns: 1fr 1fr; }
   .process-cards  { grid-template-columns: 1fr 1fr; }
+  .about-top { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (max-width: 600px) {
   .quality-cards { grid-template-columns: 1fr; }
@@ -320,7 +323,7 @@ const HeroVideo = () => {
 const TopNav = () => (
   <nav className="topnav">
     <a href="#" className="nav-logo">
-      <img src="logo.png" alt="Harvest Biosolutions" />
+      <img src="Harvest logo black.png" alt="Harvest Biosolutions" />
     </a>
     <a href="#notify" className="nav-cta">
       <span className="dot"></span>
@@ -332,32 +335,28 @@ const TopNav = () => (
 // ---- About ----
 const About = () => (
   <section className="sec">
-    <div className="sec-label">Who we are</div>
-    <h2 className="about-head">Science first.<br />No exceptions.</h2>
-    <div className="about-cols">
-      <p className="about-lede">
-        We apply rigorous science and careful design to consumer health — building products that are formulated with care, verified at every step, and made to deliver real results.
-      </p>
-      <p className="about-text">
-        Harvest Biosolutions partners with experienced manufacturing, testing, and regulatory teams to bring products to market that meet the highest U.S. standards. Every decision we make starts with the research and ends with the outcome.
-      </p>
+    <div className="sec-label">About Harvest</div>
+    <div className="about-top">
+      <div>
+        <h2 className="about-head">Building the modern supplement platform.</h2>
+        <p className="about-lede">
+          Harvest Biosolutions is building a modern supplement platform that brings scientific discipline and operational excellence to consumer health. We work with experienced manufacturing, testing, and regulatory partners to deliver products that meet the expectations of the U.S. market — without compromising on quality.
+        </p>
+      </div>
+      <img className="about-img" src="upclose.png" alt="" />
     </div>
-    <div className="pillars">
-      <div className="pillar">
-        <div className="pillar-num">Science</div>
-        <h4>Literature-informed.</h4>
-        <p>Every formulation grounded in published research, careful evaluation, and transparent documentation.</p>
-      </div>
-      <div className="pillar">
-        <div className="pillar-num">Quality</div>
-        <h4>Verified at every batch.</h4>
-        <p>Qualified suppliers, defined protocols, and consistency-focused processes — third-party tested.</p>
-      </div>
-      <div className="pillar">
-        <div className="pillar-num">Intent</div>
-        <h4>Measurable outcomes.</h4>
-        <p>Focused development and a commitment to products that deliver on what they promise.</p>
-      </div>
+    <div className="about-stats">
+      {[
+        { val: "U.S.",    desc: "Market Focus" },
+        { val: "Quality", desc: "First Approach" },
+        { val: "Science", desc: "Led Development" },
+        { val: "Scale",   desc: "Ready Operations" },
+      ].map(({ val, desc }) => (
+        <div key={val} className="about-stat">
+          <div className="about-stat-val">{val}</div>
+          <div className="about-stat-desc">{desc}</div>
+        </div>
+      ))}
     </div>
   </section>
 );
@@ -366,11 +365,11 @@ const About = () => (
 const Quality = () => (
   <section className="sec">
     <div className="quality-header">
+      <img className="quality-img" src="Microbial.jpg" alt="" />
       <div>
         <div className="sec-label">Quality &amp; Compliance</div>
         <h2 className="quality-head">Operational maturity<br />from the start.</h2>
       </div>
-      <img className="quality-img" src="upclose.png" alt="" />
     </div>
     <div className="quality-cards">
       <div className="quality-card">
@@ -672,8 +671,8 @@ const App = () => (
     <HeroVideo />
     <TopNav />
     <About />
-    <Quality />
     <Process />
+    <Quality />
     <TeaserBridge />
     <MicrobeVideo />
     <Partners />
