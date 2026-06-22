@@ -233,7 +233,9 @@ img { display: block; max-width: 100%; }
 .process-card.active p { color: rgba(255,255,255,0.6); }
 
 /* Three pillars */
-.pillars-label { text-align: center; }
+.pillars-header { display: grid; grid-template-columns: 3fr 2fr; gap: 60px; align-items: center; margin-bottom: 56px; }
+.pillars-head { font-weight: 500; font-size: clamp(32px, 4vw, 64px); line-height: 1.05; letter-spacing: -0.03em; margin-top: 20px; }
+.pillars-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 16px; display: block; }
 .pillars-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .pillar-card { padding: 32px 28px; border: 1px solid #f0f0f0; border-radius: 14px; }
 .pillar-card svg { width: 26px; height: 26px; color: #111; margin-bottom: 22px; display: block; }
@@ -252,6 +254,7 @@ img { display: block; max-width: 100%; }
   .quality-header { grid-template-columns: 1fr; gap: 32px; }
   .quality-cards  { grid-template-columns: 1fr 1fr; }
   .process-cards  { grid-template-columns: 1fr 1fr; }
+  .pillars-header { grid-template-columns: 1fr; gap: 32px; }
   .pillars-cards  { grid-template-columns: 1fr; }
   .about-top { grid-template-columns: 1fr; gap: 32px; }
 }
@@ -376,8 +379,13 @@ const About = () => (
 // ---- Three pillars ----
 const Pillars = () => (
   <section className="sec pillars">
-    <div className="sec-label pillars-label">Our approach</div>
-    <h2 className="process-head">Three pillars that guide<br />every decision.</h2>
+    <div className="pillars-header">
+      <div>
+        <div className="sec-label">Our approach</div>
+        <h2 className="pillars-head">Three pillars that guide every decision.</h2>
+      </div>
+      <img className="pillars-img" src="Science 1.jpg" alt="" />
+    </div>
     <div className="pillars-cards">
       {[
         {
