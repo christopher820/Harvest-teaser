@@ -299,7 +299,7 @@ const HeroVideo = () => {
   return (
     <div ref={containerRef} className="hero-scroll-container">
       <div className="hero-sticky">
-        <video className="hero-video" src="hero.mp4" autoPlay muted loop playsInline />
+        <video className="hero-video" src="hero.mp4" autoPlay muted loop playsInline preload="auto" />
         <div className="hero-overlay" />
         <div className="hero-text-wrap">
           <div className="hero-text-1" style={{ opacity: t1 }}>
@@ -498,12 +498,15 @@ const MicrobeVideo = () => {
 
     // ── Extract all frames once by playing at 2× speed ──
     // Forward/backward scrubbing then becomes a pure array lookup — no seeking ever.
+    // Kept at a real pixel size (not 1×1) and just pushed off-screen — mobile
+    // browsers throttle/pause decode on near-zero-size or opacity:0 video elements,
+    // which left the canvas black on phones.
     const vid = document.createElement('video');
     vid.src = 'pill.mp4';
     vid.muted = true;
     vid.playsInline = true;
     vid.preload = 'auto';
-    vid.style.cssText = 'position:fixed;opacity:0;pointer-events:none;width:1px;height:1px;top:-9999px';
+    vid.style.cssText = 'position:fixed;pointer-events:none;width:320px;height:180px;left:-9999px;top:0;';
     document.body.appendChild(vid);
 
     const makeFrame = (w, h) => {
@@ -550,9 +553,22 @@ const MicrobeVideo = () => {
       drawFrame(0);
     };
 
-    extract().catch(console.warn);
+    // Don't start downloading/decoding pill.mp4 until the user is about to
+    // reach this section — otherwise it competes with the hero video for
+    // network and CPU right at page load, stalling both on mobile.
+    let started = false;
+    const startExtract = () => {
+      if (started) return;
+      started = true;
+      extract().catch(console.warn);
+    };
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) startExtract();
+    }, { rootMargin: '800px 0px' });
+    io.observe(container);
 
     return () => {
+      io.disconnect();
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(rafId);
